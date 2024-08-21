@@ -1,7 +1,7 @@
 // The car example from the SimPy/Sim# lecture.  
 console.log("Start Simulation program " ) ; 
-const SimLuxJS = require('../simLuxJS.js').SimLuxJS; 
-const SimEntity = require('../simLuxJS.js').SimEntity;  
+const SimLuxJS = require('../../SimLuxJS.js').SimLuxJS; 
+const SimEntity = require('../../SimLuxJS.js').SimEntity;  
 
 // Global Experiment Parameters 
 Maxenid =         100;    // Number of entities 

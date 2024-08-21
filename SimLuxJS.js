@@ -56,7 +56,7 @@ class SimLuxJS {
      * An optional time at which the simulation stops.
      */
     stopTime = undefined;
-
+    // --- Begin of code ----
     constructor(enableLogging=false) {
         this.enableLogging = enableLogging;
     }
@@ -276,6 +276,7 @@ class SimLuxJS {
                 // This line is the actual handling for this case. It prevents the simulation from ending
                 // and allows the SimEntities to continue their work.
                 await new Promise(r => process.nextTick(f => {}));
+                //await process.nextTick(f => {});
                 somethingHappened = true;
                 continue;
             }
