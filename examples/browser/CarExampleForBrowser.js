@@ -1,6 +1,6 @@
 // The car example from the SimPy/Sim# lecture.  
 
-const nodeSim = new SimJS();
+const nodeSim = new SimLuxJS();
 const maut = nodeSim.createResource(1);
 
 async function car(carid, parktime, drivetime, mauttime) {

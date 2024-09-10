@@ -1,6 +1,6 @@
 // The same as the CarExample.js but it uses 'waitUntil' instead of 'waitForResource'.
 
-const nodeSim = new SimJS(true);
+const nodeSim = new SimLuxJS(true);
 let maut = nodeSim.createControlVariable(0); // Counts the cars paying the maut.
 let lunch = nodeSim.createControlVariable(false); // Counts the cars paying the maut.
 
@@ -58,6 +58,8 @@ nodeSim.addSimEntity(new SimEntity(async SimEntity => mautChecker(4, 15)));
 nodeSim.addSimEntity(new SimEntity(async SimEntity => mautWorkingTimeHandler(10, 0.5)));
 
 nodeSim.run(11.5).then(() => {
-    //console.log("Simulation step 1 finished.")
-    //nodeSim.run(12.5);
+    console.log("Simulation step 1 finished.")
+    nodeSim.run().then(() => {
+		console.log("Simulation finished.")
+	});
 });

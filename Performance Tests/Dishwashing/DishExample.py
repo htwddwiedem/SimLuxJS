@@ -104,7 +104,7 @@ def testPerformance():
 	outputFile.write(",,,,\n")
 	outputFile.write("logging,n,preparationDuration,runDuration,totalDuration\n")
         
-	for logging in [False, True]:
+	for logging in [True, False]:
 		for n in [100, 1000, 10000, 25000, 50000, 100000, 250000]:
 			outputFile.write(",,,,\n");
 			

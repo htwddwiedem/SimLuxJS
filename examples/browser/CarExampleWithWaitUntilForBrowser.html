@@ -1,0 +1,32 @@
+<html>
+<head>
+    <script src="../../node-modules-for-browser.js"></script>
+    <script src="../../SimLuxJSForBrowser.js"></script>
+    <script>
+        function load_js(jsScript)
+        {
+           var script= document.createElement('script');
+           script.src= jsScript;
+           document.head.appendChild(script);
+        }
+
+        function out(text) {
+            var output = document.getElementById("out");
+            newText = new Date().toLocaleTimeString() + ": " + text + "<br/>"
+            output.innerHTML += newText;
+        }
+
+        function runSimulation(sim) {
+            out("Starting simulation " + sim);
+            
+            load_js(sim);
+            
+            out("Finished simulation " + sim);
+        }
+
+    </script>
+</head>
+<body onload="runSimulation('CarExampleWithWaitUntilForBrowser.js')">
+<div id="out"/>
+</body>
+</html>

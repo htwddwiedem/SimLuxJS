@@ -9,7 +9,7 @@
 /**
  * The main functionality of the Simulation is happening here.
  */
-class SimJS {
+class SimLuxJS {
     /**
      * A list of SimEntities which have recently been added but not started yet.
      */
