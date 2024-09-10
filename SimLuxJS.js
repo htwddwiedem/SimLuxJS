@@ -272,11 +272,11 @@ class SimLuxJS {
             if (this.#continueingAfterResourceAquisition) {
                 // this.#logIfEnabled("Waiting for the SimEntities which recently acquired a resource.")
                 this.#continueingAfterResourceAquisition = false;
+
+				// This line is the actual handling for this case. It prevents the simulation from ending
+                // and allows the SimEntities to continue their work.                
+				await process.nextTick(f => {});
                 
-                // This line is the actual handling for this case. It prevents the simulation from ending
-                // and allows the SimEntities to continue their work.
-                await new Promise(r => process.nextTick(f => {}));
-                //await process.nextTick(f => {});
                 somethingHappened = true;
                 continue;
             }
