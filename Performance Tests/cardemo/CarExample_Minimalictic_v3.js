@@ -1,11 +1,9 @@
-// Import of SimLuxJs-simulation kernel  
-const SimLuxJS = require('../../SimLuxJs.js').SimLuxJs; 
-const SimEntity = require('../../SimLuxJS.js').SimEntity;  
-const simLuxJs = new SimLuxJs();
-
+// Import of simLuxJS-simulation kernel  
+const {SimLuxJS, SimEntity} = require('../../SimLuxJS.js'); 
+const simLuxJS = new SimLuxJS();
 
 // global model definitions - the car -model
-const toll = simLuxJs.createResource(1);
+const toll = simLuxJS.createResource(1);
 let tollqueue =0, tollqueueMax = -1; 
 
 function normalDistribution(mean, sigma)
@@ -19,15 +17,15 @@ function normalDistribution(mean, sigma)
 
 
 async function car(simid, carid, parktime, drivetime1, tolltime,drivetime2)
-{   await simLuxJs.advance(parktime); 
-    await simLuxJs.advance(drivetime1); 
+{   await simLuxJS.advance(parktime); 
+    await simLuxJS.advance(drivetime1); 
     tollqueue++; 
     if (tollqueue > tollqueueMax ) tollqueueMax = tollqueue;
-    let releasetoll = await simLuxJs.waitForResource(toll); 
+    let releasetoll = await simLuxJS.waitForResource(toll); 
     tollqueue--;     
-    await simLuxJs.advance(tolltime);  // Charge the toll fee
+    await simLuxJS.advance(tolltime);  // Charge the toll fee
     releasetoll(); 
-    await simLuxJs.advance(drivetime2);  // continue after toll station 
+    await simLuxJS.advance(drivetime2);  // continue after toll station 
 };
    
 async function DoSimulationExperiments ( )
@@ -35,8 +33,8 @@ async function DoSimulationExperiments ( )
 // measure runtime over a number of simulation experiments each with 3 cars
 console.log("Start Simulation-experiments  ############ " ) ; 
 
-simLuxJs.enableLogging = false;  
-// simLuxJs.enableLogging = true; 
+simLuxJS.enableLogging = false;  
+// simLuxJS.enableLogging = true; 
 
 // Experiment specific iit vaulues 
 let simexperiments = 10; 
@@ -48,11 +46,10 @@ let eventid = 0,  Maxenid = 10, enid = 0;
 
 let genInterval =1; 
 
-for (exp = 1; exp<=simexperiments; exp++)
-    {  
+for (exp = 1; exp<=simexperiments; exp++) {  
     tollqueueMax=-1; 
-    // const simLuxJs = new simLuxJs();
-    // const toll = simLuxJs.createResource(1); 
+    // const simLuxJS = new simLuxJS();
+    // const toll = simLuxJS.createResource(1); 
     for ( enid =1; enid<=Maxenid; enid++ )
     { 
 		let carid = (exp-1)*Maxenid +enid; // Count Cars up .. 
@@ -62,26 +59,26 @@ for (exp = 1; exp<=simexperiments; exp++)
     let drivetime1 = drivetime; 
     let drivetime2 = drivetime; 
      
-		simLuxJs.addSimEntity(new SimEntity(simEntity => car(exp, carid, parktime, drivetime1, tolltime ,drivetime2))) ; ;
+		simLuxJS.addSimEntity(new SimEntity(simEntity => car(exp, carid, parktime, drivetime1, tolltime ,drivetime2))) ; ;
 		console.log(" ... created Enitity: " +  carid + " with Parktime=" + parktime) ; 
-        // simLuxJs.addSimEntity(new SimEntity(simEntity => car(exp, exp*Maxenid +enid, 2+2*enid, 6, 3)));
-        // await simLuxJs.advance(genInterval);
+        // simLuxJS.addSimEntity(new SimEntity(simEntity => car(exp, exp*Maxenid +enid, 2+2*enid, 6, 3)));
+        // await simLuxJS.advance(genInterval);
     }
 
-    await simLuxJs.run(until=undefined).then();
+    await simLuxJS.run(until=undefined).then();
 
-    let perf_runTime_show =   simLuxJs.perf_runTime; 
+    let perf_runTime_show =   simLuxJS.perf_runTime; 
     perftime_count = perftime_count +1; 
     perftime_Sum +=  perf_runTime_show; 
     // let sigma_qsum2 = (perf_runTime_show  )
 
-    }
-  // end of all simulations 
-  // xp--; // for cpompensation of for next ++ 
-  console.log("End of all simulations #############################################################");
-  console.log(" - runs           :  " +  exp  );
-  console.log(" - events/run     :  " +  eventid/exp  );
-  console.log(" - tollqueueMax   :  " +  tollqueueMax  );
+}
+// end of all simulations 
+// xp--; // for cpompensation of for next ++ 
+console.log("End of all simulations #############################################################");
+console.log(" - runs           :  " +  exp  );
+console.log(" - events/run     :  " +  eventid/exp  );
+console.log(" - tollqueueMax   :  " +  tollqueueMax  );
 
   
   
