@@ -1,6 +1,6 @@
 SimLuxJS is an open JavScript-based discrete event simulator.
 
-Please reda the conference paper (*.pdf) first for a history and the common goal fo the project.
+Please read the conference paper (*.pdf) first for a short history and the common goal fo the project.
 
 In the repo you will find SimLuxJS-kernel in the file SimLuxJS.js.
 
